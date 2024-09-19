@@ -1,36 +1,156 @@
-Here’s a **GitHub description** for your project:
+Here's a **GitHub README** template for your app, which will take data from Reddit and Twitter, then use the Hugging Face API to interpret the words into data for a sentiment analyzer.
 
 ---
 
-## MarketTool - Crypto Sentiment Analyzer
+# **Market Sentiment Analyzer**
 
-**MarketTool** is a C++ application designed to analyze market sentiment for cryptocurrencies and stocks using real-time data from social media and financial news. It leverages the power of the **OpenAI ChatGPT API** for natural language processing and analysis, combined with the **CURL** library for fetching data from sources like **Twitter** and **Reddit**.
+![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)
 
-### Key Features:
-- **Real-time sentiment analysis**: Pulls data from platforms such as **Twitter** and **Reddit** to gauge market sentiment.
-- **Graphical User Interface**: Built with **wxWidgets**, the app offers a clean and interactive dashboard for monitoring sentiment, viewing graphs, and making buy/sell decisions.
-- **Integrated ChatGPT API**: Utilizes OpenAI's language model to process and analyze raw text, providing insights into market trends.
-- **CURL-based data fetching**: Uses the **libcurl** library to fetch social media and news data in real-time.
+## **Overview**
+
+**Market Sentiment Analyzer** is a tool designed to extract data from social media platforms like **Reddit** and **Twitter**, analyze the sentiment of posts and tweets, and use that data to gauge market sentiment for financial assets, such as cryptocurrencies or stocks. The app uses the **Hugging Face API** for Natural Language Processing (NLP) to classify the sentiment of social media posts and provide insights into whether the market mood is positive, negative, or neutral.
+
+## **Features**
+
+- **Data Extraction from Social Media**: Collects posts from Twitter and Reddit using their respective APIs.
+- **Sentiment Analysis**: Uses Hugging Face's NLP models to analyze the sentiment (positive, negative, neutral) of the extracted text data.
+- **Live Sentiment Graph**: Displays live updates of sentiment over time in a graphical format.
+- **Financial Integration**: Provides insights into market trends based on social media sentiment, useful for making trading decisions.
+- **User-Friendly Interface**: Simple and modern UI for displaying data, graphs, and trends.
+
+## **Technologies Used**
+
+- **Languages**: C++, Python (for data extraction), and wxWidgets (for GUI).
+- **APIs**:
+  - **Twitter API**: For collecting tweets related to financial topics.
+  - **Reddit API (PRAW)**: For scraping posts from relevant subreddits.
+  - **Hugging Face API**: For performing sentiment analysis on the collected text data.
+- **Libraries**:
+  - **libcurl**: For making HTTP requests to the APIs.
+  - **wxWidgets**: To build the graphical user interface.
+  - **nlohmann/json**: For parsing JSON data from the APIs.
+
+## **Installation**
+
+### **1. Prerequisites**
+- **C++ compiler** (e.g., g++, clang)
+- **wxWidgets**: For GUI.
+- **libcurl**: For HTTP requests.
+- **PRAW**: Python Reddit API Wrapper for Reddit data collection.
+- **Tweepy**: Python library to interact with Twitter API.
+
+### **2. Clone the Repository**
+
+```bash
+git clone https://github.com/yourusername/market-sentiment-analyzer.git
+cd market-sentiment-analyzer
+```
+
+### **3. Install Dependencies**
+
+#### **a. Install wxWidgets**
+
+Follow the instructions on the [wxWidgets website](https://www.wxwidgets.org/downloads/) for your specific operating system.
+
+#### **b. Install libcurl**
+
+For Linux:
+```bash
+sudo apt-get install libcurl4-openssl-dev
+```
+
+For macOS:
+```bash
+brew install curl
+```
+
+For Windows:
+- Use **MSYS2** or download precompiled binaries.
+
+#### **c. Install Python Libraries**
+
+You'll need Python 3 and the following libraries:
+
+```bash
+pip install praw tweepy requests
+```
+
+### **4. Configure API Keys**
+
+Before running the app, you'll need to set up the API keys:
+
+1. **Twitter API**: Sign up at [Twitter Developer Portal](https://developer.twitter.com/) and get your API credentials.
+2. **Reddit API**: Create a Reddit application at [Reddit App Preferences](https://www.reddit.com/prefs/apps) to get API keys.
+3. **Hugging Face API**: Sign up at [Hugging Face](https://huggingface.co/) and get your API key.
+
+### **5. Configure the API Keys in Your Code**
+
+In the `config.json` file, add your API keys:
+
+```json
+{
+  "twitter_api_key": "your-twitter-api-key",
+  "twitter_api_secret_key": "your-twitter-api-secret-key",
+  "reddit_client_id": "your-reddit-client-id",
+  "reddit_client_secret": "your-reddit-client-secret",
+  "huggingface_api_key": "your-huggingface-api-key"
+}
+```
+
+## **Usage**
+
+### **1. Run the Application**
+
+To start the application, navigate to the project directory and run the following command:
+
+```bash
+./MarketTool
+```
+
+### **2. User Interface**
+
+- **Login Screen**: Enter your username and password to access the app.
+- **Main Dashboard**:
+  - **Graphs**: Displays live sentiment trends based on data collected from Twitter and Reddit.
+  - **Trade Panel**: View buy/sell recommendations based on the analyzed sentiment.
+  - **News Panel**: Aggregated news related to the financial topics under analysis.
+  - **Hugging Face Panel**: Manually input data to analyze using Hugging Face.
+
+## **How It Works**
+
+### **1. Data Collection**
+
+- **Twitter**: The app uses the Twitter API to fetch tweets containing specific financial-related keywords or hashtags (e.g., `$BTC`, `#StockMarket`).
+- **Reddit**: It scrapes subreddits like `r/Cryptocurrency`, `r/Stocks`, and others for discussions related to financial markets.
+
+### **2. Sentiment Analysis**
+
+- The app sends the collected text data to Hugging Face's NLP API, which processes the text and returns the sentiment (positive, negative, neutral).
   
-### Technologies:
-- **C++** (core logic and API integration)
-- **wxWidgets** (for GUI)
-- **CURL** (for HTTP requests)
-- **nlohmann/json** (for JSON handling)
-- **OpenAI ChatGPT API** (for natural language processing)
+### **3. Visualization**
 
-### How to Run:
-1. Clone the repository.
-2. Install dependencies:
-   - **libcurl**
-   - **wxWidgets**
-   - **nlohmann/json**
-3. Set your OpenAI API key as an environment variable:
-   ```bash
-   export OPENAI_API_KEY="your_api_key_here"
-   ```
-4. Build and run the project using **CMake**.
+- The app updates graphs in real-time, showing the sentiment trends and allowing users to understand the general market mood based on social media data.
 
-### Future Enhancements:
-- **Historical data analysis**: Integrating historical data from financial markets for backtesting.
-- **More platforms**: Adding support for additional social media platforms and financial news sources.
+## **Planned Features**
+
+- **Historical Sentiment Data**: Allow users to view past sentiment trends to assist with market analysis.
+- **Sentiment Alerts**: Provide real-time alerts when the sentiment changes significantly, indicating a potential market move.
+- **Integration with Trading APIs**: Execute trades automatically based on sentiment analysis.
+
+## **Contributing**
+
+Contributions are welcome! If you would like to contribute to this project, please fork the repository and submit a pull request with your proposed changes.
+
+## **License**
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## **Contact**
+
+For any questions or suggestions, feel free to contact us at:
+- **Email**: your-email@example.com
+- **GitHub Issues**: [Issues Page](https://github.com/yourusername/market-sentiment-analyzer/issues)
+
+---
+
+Let me know if you'd like to modify any sections!
