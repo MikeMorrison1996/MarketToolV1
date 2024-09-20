@@ -86,7 +86,7 @@ void LoginFrame::OnLogin(wxCommandEvent& event) {
     // Simple authentication check (replace with your actual logic)
     if (username == "admin" && password == "password") {
         // Open the main application window
-        MainFrame* mainFrame = new MainFrame("Market Tool", "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"); // Replace "YourAPIKey" with your actual API key
+        MainFrame* mainFrame = new MainFrame("Market Tool", "PLACE_API_KEY_HERE"); // Replace "YourAPIKey" with your actual API key
         mainFrame->Show(true);
 
         // Close the login window
